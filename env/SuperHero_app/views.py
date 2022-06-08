@@ -9,20 +9,77 @@ def home(request):
 
     if 'name' in request.POST:
         name = request.POST['name']
+        access_token = '10158877596033137'
+        api_url = 'https://superheroapi.com/api/'+access_token+'/search/'+name
+        api_data = requests.get(api_url)
+        api_json = api_data.json()
+        
+        api_response = api_json
+        heroPicture= api_response["results"][0]["image"]["url"]
+        heroName= api_response["results"][0]['name']
+        intelligence= api_response["results"][0]['powerstats']['intelligence']
+        strength= api_response["results"][0]['powerstats']['strength']
+        durability= api_response["results"][0]['powerstats']['durability']
+        power= api_response["results"][0]['powerstats']['power']
+        combat= api_response["results"][0]['powerstats']['combat']
+        
+        name = request.POST['card3']
+        access_token = '10158877596033137'
+        api_url = 'https://superheroapi.com/api/'+access_token+'/search/'+name
+        api_data = requests.get(api_url)
+        api_json = api_data.json()
+          
+        api_response = api_json
+        heroPicture2= api_response["results"][0]["image"]["url"]
+        heroName2= api_response["results"][0]['name']
+        intelligence2= api_response["results"][0]['powerstats']['intelligence']
+        strength2= api_response["results"][0]['powerstats']['strength']
+        durability2= api_response["results"][0]['powerstats']['durability']
+        power2= api_response["results"][0]['powerstats']['power']
+        combat2= api_response["results"][0]['powerstats']['combat']
+          
+          
+        
+        
+        
+        context={     
+        "heroPicture": heroPicture,
+        "heroName": heroName,
+        "intelligence": intelligence,
+        "strength": strength,
+        "durability":durability,
+        "power": power,
+        "combat":combat,
+        "heroPicture2": heroPicture2,
+        "heroName2": heroName2,
+        "intelligence2": intelligence2,
+        "strength2": strength2,
+        "durability2":durability2,
+        "power2": power2,
+        "combat2":combat2,  
+        }
     else:
-        name = ""
+        context={
+        
+        }
+        
+        
+        
+   
+        
+        
+    return render(request, 'SuperHero_app/index.html', context )
 
-    access_token = '10158877596033137'
-    api_url = 'https://superheroapi.com/api/'+access_token+'/search/'+name
-    api_data = requests.get(api_url)
-    api_json = api_data.json()
-    
-    api_response = api_json
-    print(api_response)
-    context={
-       "api_response": api_response,
-    }
-    return render(request, 'SuperHero_app/index.html', context)
+def about(request):
+  return render(request, 'SuperHero_app/about.html')
+
+
+
+
+
+def style(request):
+  return render(request, 'style.htm')
+
 
 
 {
